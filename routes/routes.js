@@ -18,14 +18,18 @@ router.post('/insert',controllers.insert)
 
 router.get('/edit/:id',controllers.edit)
 
-router.post('/update',controllers.update)
+router.post('/update/:id',controllers.update)
+
+router.get('/delete/:id',controllers.remove)
 
 router.get('/adminMenu',controllers.showMenuAdmin)
 
 router.get('/showCos',controllers.showCos)
 
-router.get('/detail',controllers.detail)
+router.get('/detail/:id',controllers.detail)
 
 router.post('/login',controllers.login)
+
+router.post('/search',controllers.search)
 
 module.exports = router

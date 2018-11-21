@@ -66,9 +66,9 @@ var insert = (req,res) => {
     uploads(req,res,(err)=>{
         if(err){console.log(err)}
         else{
-            connection.query('select count(*) as couter from menu',(err,result)=>{
+            connection.query('select id from menu order by id desc',(err,result)=>{
             var data = [
-                [result[0].couter+1,req.body.name,req.body.type,req.body.time,req.body.desc,req.file.filename,req.file.filename,idChef]
+                [result[0].id*1+1,req.body.name,req.body.type,req.body.time,req.body.desc,req.file.filename,req.file.filename,idChef]
             ]
 
             connection.query('insert into menu values ?',[data],(err,result)=>{
@@ -83,30 +83,55 @@ var insert = (req,res) => {
 
 var edit = (req,res) => {
     let list = {}
-    connection.query('select * from menu where idchef = ?',[idChef],(err,result)=>{
+    connection.query('select * from menu where id = ?',[req.params.id],(err,result)=>{
         if(err){console.log(err)}
         else{
-            for(let i=0;i<result.length;i++){
-                if(i==req.params.id){
-                    list = result[i]
-                }
-            }
+                list = result[0]
         }
         res.render('edit',{list:list})
     })
 }
 
 var update = (req,res) => {
-    res.redirect('/adminMenu')
+    var uploadsEdit = multer({
+        storage:storage,
+        fileFilter:(req,file,cb)=>{
+            checkFileType(file,cb)
+        }
+    }).single('pictureEdit');
+    uploadsEdit(req,res,(err)=>{
+        if(err){console.log(err)}
+        else{
+            let picture = ''
+            if(req.file!=undefined){
+                picture=req.file.filename
+            }
+            let data = [req.body.name,req.body.types,req.body.time,req.body.desc,picture,undefined,req.params.id]
+            connection.query('update menu set name = ?,types = ?,time = ?,descrip = ?,image = ?,video = ? where id = ?',data,(err,result)=>{
+                if(err){console.log(err)}
+                else{
+                    res.redirect('/adminMenu')
+                }
+            })
+        }
+    })
+}
+
+var remove = (req,res) => {
+    connection.query('delete from menu where id = ?',[req.params.id],(err,result)=>{
+        if(err){console.log(err)}
+        else{}
+        res.redirect('/adminMenu')
+    })
 }
 
 var showMenuAdmin = (req,res) => {
     var list = []
-    connection.query('select name,types from menu where idchef = ?',[idChef],(err,result)=>{
+    connection.query('select id,name,types from menu where idchef = ?',[idChef],(err,result)=>{
         if(err){console.log(err)}
         else{
             for(let i=0;i<result.length;i++){
-                list.push({name:result[i].name,types:result[i].types})
+                list.push({name:result[i].name,types:result[i].types,id:result[i].id})
             }
         }
         res.render('showMenuAdmin',{list:list})
@@ -114,11 +139,39 @@ var showMenuAdmin = (req,res) => {
 }
 
 var showCos = (req,res) => {
-    res.render('showCos')
+    let list = []
+    let word = req.query.word || ''
+    let sql = "select * from menu where name like '%"+word+"%' or types = '"+word+"'"
+    connection.query(sql,(err,result)=>{
+        if(err){console.log(err)}
+        else{
+            for(let i=0;i<result.length;i++){
+                list.push(result[i])
+            }
+        }
+        res.render('showCos',{list:list})
+    })
 }
 
 var detail = (req,res) => {
-    res.render('detail')
+    let list = {}
+    connection.query('select * from menu where id = ?',[req.params.id],(err,result)=>{
+        let k = ''
+        if(err){console.log(err)}
+        else{
+            list = result[0]
+
+            let desc = list.descrip+''
+            for(let i=0;i<desc.length;i+=51){
+                k+='\n'+desc.slice(i,51+i)
+            }
+        }
+        res.render('detail',{list:list,desc:k})
+    })
 }
 
-module.exports = {index,present,create,edit,showMenuAdmin,showCos,detail,insert,login,update}     
+var search = (req,res) => {
+    res.redirect('/showCos?word='+req.body.search)
+}
+
+module.exports = {index,present,create,edit,showMenuAdmin,showCos,detail,insert,login,update,remove,search}     

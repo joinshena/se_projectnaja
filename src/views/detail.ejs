@@ -18,7 +18,7 @@
 </div>
 
 <div class="w3-row-padding w3-content" style="max-width:1400px">
-    <h2 style="font-family: 'K2D', sans-serif;">ชื่อ</h2><br>
+    <h2 style="font-family: 'K2D', sans-serif;">ชื่อ <%=list.name%></h2><br>
     <div class="w3-twothird">
         <video class="video-size" id="myVideo" controls>
             <source src="assets/video/test.mp4" type="video/mp4">
@@ -37,7 +37,9 @@
     <div class="w3-third">
         <div class="w3-container w3-light-grey">
             <h2 style="font-family: 'K2D', sans-serif;">รายละเอียดเกี่ยวกับอาหาร</h2>
-            <p class="w3-justify" style="font-family: 'K2D', sans-serif;">detail</p>
+            <p class="w3-justify" style="font-family: 'K2D', sans-serif;">
+                <%=desc%>
+            </p>
         </div>
 
 

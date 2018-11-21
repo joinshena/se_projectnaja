@@ -15,87 +15,26 @@
 <div class="index" >
     <h1 style="font-family: 'K2D', sans-serif;">รายการอาหาร</h1>
 </div>
-
+<% if(list.length==0){ %>
+    <span class="text-center">ไม่พบข้อมูล</span>
+<% }else{ %>
+    <% for(let i=0;i<list.length;i++){ %>
 <div class="w3-content" style="font-family: 'K2D', sans-serif;">
-
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                detail
-            </p>
-        </div>
-
+            <div class="w3-row w3-margin">
+                <div class="w3-third">
+                    <img src="<%=list[i].image%>" style="width:100%;min-height:200px">
+                </div>
+                <div class="w3-twothird w3-container pl-3">
+                    <h2><%=list[i].name%></h2>
+                    <p>
+                        ประเภท : <%=list[i].types%><br>
+                        ระยะเวลาในการทำ : <%=list[i].time%> <br><br>
+                        <a href="/detail/<%=list[i].id%>"><input class="btn btn-outline-success" value="ดูรายละเอียด"></a>
+                </div>
+            </div>
     </div>
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                detail
-        </div>
-
-    </div>
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                detail
-            </p>
-        </div>
-
-    </div>
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                detail
-            </p>
-        </div>
-
-    </div>
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                detail
-            </p>
-        </div>
-
-    </div>
-    <div class="w3-row w3-margin">
-
-        <div class="w3-third">
-            <img src="..." style="width:100%;min-height:200px">
-        </div>
-        <div class="w3-twothird w3-container">
-            <h2>H2</h2>
-            <p>
-                deatil
-            </p>
-        </div>
-
-    </div>
-</div>
+    <% } %>
+<% } %>
 
 
 <!-- Optional JavaScript -->

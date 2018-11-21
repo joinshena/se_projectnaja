@@ -20,12 +20,13 @@
     </tr>
     <tr>
         <td class="main-b">
+            <form action="/update/<%=list.id%>" method="post" enctype="multipart/form-data">
             <h1 class="text2">ชื่อเมนู</h1>
 
-            <input type="text" class="form-control" placeholder="ชื่อเมนู" value="<%=list.name%>">
+            <input type="text" class="form-control" placeholder="ชื่อเมนู" value="<%=list.name%>" name="name">
             &nbsp;
             <h1 class="text2">เลือกประเภท</h1>
-            <select class="form-control">
+            <select class="form-control" name="types"> 
                 <option <% if(list.types=='ต้ม'){%> selected <% } %> >ต้ม</option>
                 <option <% if(list.types=='ผัด'){%> selected <% } %> >ผัด</option>
                 <option <% if(list.types=='แกง'){%> selected <% } %> >แกง</option>
@@ -41,14 +42,13 @@
             
             <h1 class="text2">คำอธิบายเมนูอาหาร</h1>
 
-            <textarea class="form-control" rows="4"><%=list.descrip%></textarea>
+            <textarea class="form-control" rows="4" name="desc"><%=list.descrip%></textarea>
 
             <h1 class="gg">รูปตัวอย่างเมนูอาหาร</h1>
-            <input type="file">
+            <input type="file" name="pictureEdit">
 
             <h1 class="gg">วิดีโอการสอน</h1>
             <input type="file">
-
         </td>
     </tr>
 
@@ -57,9 +57,9 @@
         <td class="main-c" align="right" height="300" >
 
 
-            <a href="/showad"><button type="submit" class="btn btn-success">แก้ไข</button></a>
+            <button type="submit" class="btn btn-success">แก้ไข</button>
             <a href="/adminMenu"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
-
+        </form>
         </td>
     </tr>
 </table>

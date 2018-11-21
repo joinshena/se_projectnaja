@@ -36,9 +36,9 @@
                 <a class="nav-link" href="#" onclick="document.getElementById('id01').style.display='block'">login</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a href="/showc"></a> <input class="form-control mr-sm-2" type="search" placeholder="ชื่ออาหาร/ประเภท" aria-label="Search">
-            <a href="/showc"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">ค้นหา</button></a>
+        <form class="form-inline" action="/search" method="post">
+            <input class="form-control" type="text" placeholder="ชื่ออาหาร/ประเภท" name="search">
+            <input class="btn btn-outline-success ml-2" type="submit" value="ค้นหา">
 
         </form>
     </div>

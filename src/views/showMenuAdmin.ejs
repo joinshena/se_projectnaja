@@ -25,20 +25,22 @@
 <table id="myTable">
     <tr class="header">
         <th style="width:60%;">ชื่ออาหาร</th>
-        <th style="width:40%;">ประเภทอาหาร</th>
+        <th style="width:35%;">ประเภทอาหาร</th>
+        <th style="width:5%"></th>
     </tr>
     <form method="get" id="formList">
     <% for(let i=0;i<list.length;i++){ %>
-      <tr class="" onclick="getI('<%=i%>')">
+      <tr class="" onclick="getI('<%=list[i].id%>')">
           <td><%=list[i].name%></td>
           <td><%=list[i].types%></td>
+          <td><a href="/delete/<%=list[i].id%>" class="text-body">ลบ</a></td>
       </tr>
     <% } %>
     </form>
 </table>
 <script>
   function getI(n){
-    document.getElementById('formList').action = "/edit/"+(n*1)
+    document.getElementById('formList').action = "/edit/"+n
     document.getElementById('formList').submit()
   }
 </script>
