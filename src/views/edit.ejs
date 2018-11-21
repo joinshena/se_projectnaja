@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Ez Cooking</title>
+    <link rel="icon" href="logo1.png">
+</head>
+<body>
+<table align="center" width="75%" border="0" >
+    <tr class="a" >
+        <td class="main-a" height="150" width="100%" >
+            <h2 class="text1">แก้ไข</h2>
+        </td>
+    </tr>
+    <tr>
+        <td class="main-b">
+            <h1 class="text2">ชื่อเมนู</h1>
+
+            <input type="text" class="form-control" placeholder="ชื่อเมนู" value="<%=list.name%>">
+            &nbsp;
+            <h1 class="text2">เลือกประเภท</h1>
+            <select class="form-control">
+                <option <% if(list.types=='ต้ม'){%> selected <% } %> >ต้ม</option>
+                <option <% if(list.types=='ผัด'){%> selected <% } %> >ผัด</option>
+                <option <% if(list.types=='แกง'){%> selected <% } %> >แกง</option>
+                <option <% if(list.types=='ทอด'){%> selected <% } %> >ทอด</option>
+                <option <% if(list.types=='นึ่ง'){%> selected <% } %> >นึ่ง</option>
+                <option <% if(list.types=='อบ'){%> selected <% } %> >อบ</option>
+                <option <% if(list.types=='ตุ๋น'){%> selected <% } %> >ตุ๋น</option>
+            </select>
+            &nbsp;
+            <h1 class="text2">เวลาในการทำ</h1>
+            <input type="text" name="time" value="<%=list.time%>">
+            &nbsp;
+            
+            <h1 class="text2">คำอธิบายเมนูอาหาร</h1>
+
+            <textarea class="form-control" rows="4"><%=list.descrip%></textarea>
+
+            <h1 class="gg">รูปตัวอย่างเมนูอาหาร</h1>
+            <input type="file">
+
+            <h1 class="gg">วิดีโอการสอน</h1>
+            <input type="file">
+
+        </td>
+    </tr>
+
+    <tr>
+
+        <td class="main-c" align="right" height="300" >
+
+
+            <a href="/showad"><button type="submit" class="btn btn-success">แก้ไข</button></a>
+            <a href="/adminMenu"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

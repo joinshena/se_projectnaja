@@ -1,0 +1,255 @@
+.margin-top{
+    margin: 35px;
+}
+.edit-box{
+    height: 30px;
+}
+
+.material-icons{
+   width: 20px;
+   height: 20px;
+}
+.text{
+    color: white;
+    display: inline-block;
+    margin: 20px;
+    font-family: 'K2D', sans-serif;
+
+}
+table{
+    margin-top:20px;
+
+}
+.text1{
+    color: rgb(255, 187, 153);
+    font-family: 'K2D', sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+
+.text2{
+    color: #800000;
+    font-family: 'K2D', sans-serif;
+    font-size: 40px;
+    text-align: left;
+}
+.main-c button{
+    width: 120px;
+    height:50px;
+    font-family: 'K2D', sans-serif;
+}
+.form-control{
+        background-color: gray;
+        font-family: 'K2D', sans-serif;
+
+
+}
+.gg{
+    color: #800000;
+        font-family: 'K2D', sans-serif;
+        margin-top: 35px;
+}
+.Aom1{
+    color: rgb(51, 153, 255);
+    font-family: 'K2D', sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+.summit{
+    text-align: center;
+}
+.show1{
+    color: #800000;
+    font-family: 'K2D', sans-serif;
+    font-size: 40px;
+
+}
+.collapse navbar-collapse{
+    text-align: center;
+}
+.index{
+    background-color: #ffffe6;
+}
+.navbar{
+
+    font-family: 'K2D', sans-serif;
+    height: 80px;
+    font-size: 25px;
+
+}
+.create{
+    text-align: right;
+    margin-right: 25px;
+
+}
+
+
+#myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+}
+
+.video-size{
+
+    height: 100%;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+
+
+}
+
+
+
+.login{font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+img.avatar {
+    width: 10%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+
+
+
+

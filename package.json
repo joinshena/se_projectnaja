@@ -1,0 +1,26 @@
+{
+  "name": "se_projectnaja",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joinshena/se_projectnaja.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joinshena/se_projectnaja/issues"
+  },
+  "homepage": "https://github.com/joinshena/se_projectnaja#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0"
+  }
+}

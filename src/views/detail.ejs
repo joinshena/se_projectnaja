@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/stylesheets/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Ez Cooking</title>
+</head>
+<body>
+
+<div class="index w3-padding-64 w3-margin-bottom w3-center">
+    <h1 style="color: #800000;font-family: 'K2D', sans-serif;" >รายละเอียด</h1>
+</div>
+
+<div class="w3-row-padding w3-content" style="max-width:1400px">
+    <h2 style="font-family: 'K2D', sans-serif;">ชื่อ</h2><br>
+    <div class="w3-twothird">
+        <video class="video-size" id="myVideo" controls>
+            <source src="assets/video/test.mp4" type="video/mp4">
+            <source src="assets/video/test.ogg" type="video/mp4">
+        </video>
+        <br>
+        <br>
+        <h2 style="font-family: 'K2D', sans-serif;">คอมเม้น</h2>
+        <div class="w3-justify">
+            <br>
+            <textarea style="font-family: 'K2D', sans-serif;"class="form-control" rows="4"></textarea>
+            <br>
+            <br>
+        </div>
+    </div>
+    <div class="w3-third">
+        <div class="w3-container w3-light-grey">
+            <h2 style="font-family: 'K2D', sans-serif;">รายละเอียดเกี่ยวกับอาหาร</h2>
+            <p class="w3-justify" style="font-family: 'K2D', sans-serif;">detail</p>
+        </div>
+
+
+    </div>
+</div>
+<script>
+// Get the video
+var video = document.getElementById("myVideo");
+
+// Get the button
+var btn = document.getElementById("myBtn");
+
+// Pause and play the video, and change the button text
+function myFunction() {
+    if (video.paused) {
+        video.play();
+        btn.innerHTML = "Pause";
+    } else {
+        video.pause();
+        btn.innerHTML = "Play";
+    }
+}
+</script>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
