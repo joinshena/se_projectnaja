@@ -1,6 +1,7 @@
 var connection = require('../../config/connectMysql')
 var path = require('path')
 var multer = require('multer')
+var fs = require('fs')
 
 var idChef = ''
 
@@ -13,12 +14,6 @@ var storage = multer.diskStorage({
         cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
-var uploads = multer({
-    storage:storage,
-    fileFilter:(req,file,cb)=>{
-        checkFileType(file,cb)
-    }
-}).single('picture');
 
 function checkFileType(file,cb){
     const filetypts = /jpeg|jpg|png|gif|mp4/;
@@ -79,7 +74,7 @@ var addP = (req,res) => {
                     if(err){console.log(err)}
                     else{}
                 })
-                })
+            })
         }
     })
     res.redirect('/')
@@ -90,67 +85,111 @@ var create = (req,res) => {
 }
 
 var insert = (req,res) => {
-    let video = ''
-    uploads(req,res,(err)=>{
+    var uploadsV = multer({
+        storage:storage,
+        fileFilter:(req,file,cb)=>{
+            checkFileType(file,cb)
+        }
+    }).fields([{name:'picture'},{name:'video'}]);
+
+    uploadsV(req,res,(err)=>{
         if(err){console.log(err)}
         else{
+            let name = req.body.name
+            let type = req.body.type
+            let time = req.body.time
+            let desc = req.body.desc
+            let image = req.files.picture[0].filename
+            let video = req.files.video[0].filename
+
             connection.query('select id from menu order by id desc',(err,result)=>{
                 var data = [
-                    [result[0].id*1+1,req.body.name,req.body.type,req.body.time,req.body.desc,req.file.filename,video,idChef]
+                    [result[0].id*1+1,name,type,time,desc,image,video,idChef]
                 ]
-                console.log(data)
                 connection.query('insert into menu values ?',[data],(err,result)=>{
                     if(err){console.log(err)}
                     else{}
                     res.redirect('/adminMenu')
                 })
             })
+
         }
     })
 }
 
 var edit = (req,res) => {
-    let list = {}
+    list = {}
     connection.query('select * from menu where id = ?',[req.params.id],(err,result)=>{
         if(err){console.log(err)}
         else{
-                list = result[0]
+            list = result[0]
         }
         res.render('edit',{list:list})
     })
 }
 
 var update = (req,res) => {
-    var uploadsEdit = multer({
+    var uploadsE = multer({
         storage:storage,
         fileFilter:(req,file,cb)=>{
             checkFileType(file,cb)
         }
-    }).single('pictureEdit');
-    uploadsEdit(req,res,(err)=>{
+    }).fields([{name:'pictureEdit'},{name:'videoEdit'}]);
+
+    uploadsE(req,res,(err)=>{
         if(err){console.log(err)}
         else{
-            let picture = ''
-            if(req.file!=undefined){
-                picture=req.file.filename
+            connection.query('select image,video from menu where id = ?',[req.params.id],(err,result)=>{
+            let name = req.body.name
+            let type = req.body.types
+            let time = req.body.time
+            let desc = req.body.desc
+
+            sql = "update menu set name = '"+name+"',types = '"+type+"',time = '"+time+"',descrip = '"+desc+"'"
+
+            if(req.files.pictureEdit!=undefined){
+                sql+=',image = "'+req.files.pictureEdit[0].filename+'"'
+                fs.unlink('./uploads/'+result[0].image,(err)=>{
+                    if(err){console.log(err);}
+                });
+
             }
-            let data = [req.body.name,req.body.types,req.body.time,req.body.desc,picture,undefined,req.params.id]
-            connection.query('update menu set name = ?,types = ?,time = ?,descrip = ?,image = ?,video = ? where id = ?',data,(err,result)=>{
+            if(req.files.videoEdit!=undefined){
+                sql+=',video = "'+req.files.videoEdit[0].filename+'"'
+                fs.unlink('./uploads/'+result[0].video,(err)=>{
+                    if(err){console.log(err);}
+                });
+            }
+
+            sql+=' where id = "'+req.params.id+'"'
+
+            connection.query(sql,(err,result)=>{
                 if(err){console.log(err)}
                 else{
+                    console.log(sql)
                     res.redirect('/adminMenu')
                 }
             })
+        })
         }
     })
 }
 
 var remove = (req,res) => {
+    connection.query('select image,video from menu where id = ?',[req.params.id],(err,result)=>{
+        fs.unlink('./uploads/'+result[0].image,(err)=>{
+            if(err){console.log(err);}
+        });
+        fs.unlink('./uploads/'+result[0].video,(err)=>{
+            if(err){console.log(err);}
+        });
     connection.query('delete from menu where id = ?',[req.params.id],(err,result)=>{
         if(err){console.log(err)}
-        else{}
+        else{
+        }
         res.redirect('/adminMenu')
     })
+})
 }
 
 var showMenuAdmin = (req,res) => {
