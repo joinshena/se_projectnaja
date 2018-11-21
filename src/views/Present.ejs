@@ -23,12 +23,12 @@
     <tr>
         <td class="main-b">
             <h1 class="text2">ชื่อเมนู</h1>
-
-            <input type="name" class="form-control" placeholder="ชื่อเมนู">
+            <form action="/addp" method="post" enctype="multipart/form-data">
+            <input type="text" class="form-control" placeholder="ชื่อเมนู" name="name">
             &nbsp;
             <h1 class="text2">เลือกประเภท</h1>
 
-            <select class="form-control">
+            <select class="form-control" name="types">
                 <option>ต้ม</option>
                 <option>ผัด</option>
                 <option>แกง</option>
@@ -40,10 +40,10 @@
             &nbsp;
             <h1 class="text2">คำอธิบายเมนูอาหาร</h1>
 
-            <textarea class="form-control" rows="4"></textarea>
+            <textarea class="form-control" rows="4" name="desc"></textarea>
             &nbsp;
             <h1 class="gg">รูปตัวอย่างเมนูอาหาร</h1>
-            <input type="file">
+            <input type="file" name="picturePresent">
 
         </td>
     </tr>
@@ -53,9 +53,9 @@
         <td class="main-c" align="right" height="300" >
 
 
-            <a href="/"><button type="submit" class="btn btn-success">เสนอ</button></a>
-            <a href="/"><button type="submit" class="btn btn-danger">ยกเลิก</button></a>
-
+            <button type="submit" class="btn btn-success">เสนอ</button>
+            <a href="/"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
+        </form>
         </td>
     </tr>
 </table>

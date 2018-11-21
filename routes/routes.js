@@ -12,6 +12,8 @@ router.get('/',controllers.index)
 
 router.get('/present',controllers.present)
 
+router.post('/addp',controllers.addP)
+
 router.get('/create',controllers.create)
 
 router.post('/insert',controllers.insert)
@@ -31,5 +33,7 @@ router.get('/detail/:id',controllers.detail)
 router.post('/login',controllers.login)
 
 router.post('/search',controllers.search)
+
+router.get('/show/:page',controllers.show)
 
 module.exports = router

@@ -21,7 +21,23 @@
 
 
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  
+  <form method="get" class="form-inline pl-2" id="typeShow">
+  <select class="custom-select" onchange="show()" id="type">
+      <option value="1" <% if(page==1){ %> selected <% } %> >รายการอัพโหลด</option>
+      <option value="2" <% if(page==2){ %> selected <% } %> >รายการเสนอ</option>
+     </select>
+     </form>
 
+     <script>
+       function show(){
+         let val = document.getElementById('type').value
+         document.getElementById('typeShow').action = '/show/'+val
+         document.getElementById('typeShow').submit()
+       }
+     </script>
+  
+<% if(page==1){ %>
 <table id="myTable">
     <tr class="header">
         <th style="width:60%;">ชื่ออาหาร</th>
@@ -38,6 +54,24 @@
     <% } %>
     </form>
 </table>
+<% }else{ %>
+  <table id="myTable">
+      <tr class="header">
+          <th style="width:10%">รูปภาพ</th>
+          <th style="width:30%;">ชื่ออาหาร</th>
+          <th style="width:10%;">ประเภทอาหาร</th>
+          <th style="width:50%">รายละเอียด</th>
+      </tr>
+      <% for(let i=0;i<list.length;i++){ %>
+        <tr>
+            <td><img class="img-thumbnail" src="<%=list[i].image%>" alt="" width="100"></td>
+            <td><%=list[i].name%></td>
+            <td><%=list[i].types%></td>
+            <td><%=list[i].descrip%></td>
+        </tr>
+      <% } %>
+  </table>
+<% } %> 
 <script>
   function getI(n){
     document.getElementById('formList').action = "/edit/"+n
@@ -57,8 +91,9 @@ function myFunction() {
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
+    td1 = tr[i].getElementsByTagName("td")[1];
     if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td1.innerHTML.toUpperCase().indexOf(filter) > -1 ) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";

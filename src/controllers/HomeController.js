@@ -4,6 +4,8 @@ var multer = require('multer')
 
 var idChef = ''
 
+var page = 1
+
 //multer
 var storage = multer.diskStorage({
     destination:'./uploads/',
@@ -19,7 +21,7 @@ var uploads = multer({
 }).single('picture');
 
 function checkFileType(file,cb){
-    const filetypts = /jpeg|jpg|png|gif/;
+    const filetypts = /jpeg|jpg|png|gif|mp4/;
 
     const extname = filetypts.test(path.extname(file.originalname).toLowerCase());
 
@@ -58,26 +60,52 @@ var present = (req,res) => {
     res.render('present')
 }
 
+var addP = (req,res) => {
+    var uploadsPresent = multer({
+        storage:storage,
+        fileFilter:(req,file,cb)=>{
+            checkFileType(file,cb)
+        }
+    }).single('picturePresent');
+    uploadsPresent(req,res,(err)=>{
+        if(err){console.log(err)}
+        else{
+            connection.query('select id from menu order by id desc',(err,result)=>{
+                var data = [
+                    [result[0].id*1+1,req.body.name,req.body.types,undefined,req.body.desc,req.file.filename,undefined,undefined]
+                ]
+    
+                connection.query('insert into menu values ?',[data],(err,result)=>{
+                    if(err){console.log(err)}
+                    else{}
+                })
+                })
+        }
+    })
+    res.redirect('/')
+}
+
 var create = (req,res) => {
     res.render('create')
 }
 
 var insert = (req,res) => {
+    let video = ''
     uploads(req,res,(err)=>{
         if(err){console.log(err)}
         else{
             connection.query('select id from menu order by id desc',(err,result)=>{
-            var data = [
-                [result[0].id*1+1,req.body.name,req.body.type,req.body.time,req.body.desc,req.file.filename,req.file.filename,idChef]
-            ]
-
-            connection.query('insert into menu values ?',[data],(err,result)=>{
-                if(err){console.log(err)}
-                else{}
-            })
+                var data = [
+                    [result[0].id*1+1,req.body.name,req.body.type,req.body.time,req.body.desc,req.file.filename,video,idChef]
+                ]
+                console.log(data)
+                connection.query('insert into menu values ?',[data],(err,result)=>{
+                    if(err){console.log(err)}
+                    else{}
+                    res.redirect('/adminMenu')
+                })
             })
         }
-        res.redirect('/adminMenu')
     })
 }
 
@@ -126,16 +154,28 @@ var remove = (req,res) => {
 }
 
 var showMenuAdmin = (req,res) => {
-    var list = []
-    connection.query('select id,name,types from menu where idchef = ?',[idChef],(err,result)=>{
-        if(err){console.log(err)}
-        else{
-            for(let i=0;i<result.length;i++){
-                list.push({name:result[i].name,types:result[i].types,id:result[i].id})
+    let list = []
+    if(page==1){
+        connection.query('select id,name,types from menu where idchef = ?',[idChef],(err,result)=>{
+            if(err){console.log(err)}
+            else{
+                for(let i=0;i<result.length;i++){
+                    list.push({name:result[i].name,types:result[i].types,id:result[i].id})
+                }
             }
-        }
-        res.render('showMenuAdmin',{list:list})
-    })
+            res.render('showMenuAdmin',{list:list,page:page})
+        })
+    }else{
+        connection.query('select name,types,descrip,image from menu where idchef is null',(err,result)=>{
+            if(err){console.log(err)}
+            else{
+                for(let i=0;i<result.length;i++){
+                    list.push(result[i])
+                }
+            }
+            res.render('showMenuAdmin',{list:list,page:page})
+        })
+    }
 }
 
 var showCos = (req,res) => {
@@ -174,4 +214,9 @@ var search = (req,res) => {
     res.redirect('/showCos?word='+req.body.search)
 }
 
-module.exports = {index,present,create,edit,showMenuAdmin,showCos,detail,insert,login,update,remove,search}     
+var show = (req,res) => {
+    page = req.params.page
+    res.redirect('/adminMenu')
+}
+
+module.exports = {index,present,create,edit,showMenuAdmin,showCos,detail,insert,login,update,remove,search,show,addP}     
